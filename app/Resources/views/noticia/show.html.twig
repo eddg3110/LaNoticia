@@ -1,0 +1,47 @@
+
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Noticia</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>{{ noticium.titulo }}</th>
+            </tr>
+            <tr>
+                <td>{{ noticium.subtitulo }}</td>
+            </tr>
+            <tr>
+                <td>{{ noticium.contenido }}</td>
+            </tr>
+            <tr>            
+                <td>{% if noticium.tiempo %}{{ noticium.tiempo|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td></td>
+                <td><strong>Fuente:</strong>{{ noticium.fuente }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+	<ul class="record_actions">
+    	
+        	<div class="span3">
+                <a href="{{ path('noticia_index') }}" class="btn btn-large btn-block btn-default">Volver a Noticias</a>
+            </div>
+    	
+    	
+        	<div class="span3">
+                            <a href="{{ path('noticia_edit', { 'id': noticium.id }) }}"class="btn btn-large btn-block btn-primary">Editar</a>
+            </div>
+    	
+    	       	
+        	<div class="span3">
+                <form action="{{ path('noticia_delete', { 'id': noticium.id }) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    {{ form_widget(delete_form) }}
+                    <button type="submit" class="btn btn-large btn-block btn-danger">Borrar</button>
+                </form>
+            </div>
+    	
+	</ul>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Noticias</h1>
+
+    <div class="row top-buffer">
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Subtitulo</th>
+                <th>Contenido</th>
+                <th>Tiempo</th>
+                <th>Fuente</th>
+                <th>Acciones</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for noticium in noticias %}
+            <tr>
+                <td><a href="{{ path('noticia_show', { 'id': noticium.id }) }}">{{ noticium.id }}</a></td>
+                <td>{{ noticium.titulo }}</td>
+                <td>{{ noticium.subtitulo }}</td>
+                <td>{{ noticium.contenido }}</td>
+                <td>{% if noticium.tiempo %}{{ noticium.tiempo|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{{ noticium.fuente }}</td>
+                <td>
+                    <ul>
+                        <div class="span2">
+                            <a href="{{ path('noticia_show', { 'id': noticium.id }) }}"class="btn btn-large btn-block btn-default">ver</a>
+                        </div>
+                        <div class="span2">
+                            <a href="{{ path('noticia_edit', { 'id': noticium.id }) }}"class="btn btn-large btn-block btn-inverse">editar</a>
+                        </div>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <div class="row top-buffer">
+        <div class="span3">
+            <a href="{{ path('noticia_new') }}" class="btn btn-large btn-block btn-primary">Nueva Noticia</a>
+        </div>
+    </div>
+    
+{% endblock %}
